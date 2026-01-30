@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Be My Valentine</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: #ffe6ef;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #mainImage {
+            max-width: 300px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+        .btn {
+            padding: 15px 30px;
+            font-size: 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        #yesBtn {
+            background: #ff4f8b;
+            color: white;
+        }
+        #noBtn {
+            background: #cccccc;
+        }
+    </style>
+</head>
+<body>
+    <img id="mainImage" src="pls.jpg" alt="Valentine Image" />
+    <h1 id="mainText">Will you be my Valentine?</h1>
+
+    <div>
+        <button id="yesBtn" class="btn">Yes</button>
+        <button id="noBtn" class="btn">No</button>
+    </div>
+
+    <audio id="bgMusic" src="yippie.mp3"></audio>
+    <audio id="bgMusic2" src="hmm.mp3"></audio>
+
+<script>
+    const mainImage = document.getElementById('mainImage');
+    const mainText = document.getElementById('mainText');
+    const yesBtn = document.getElementById('yesBtn');
+    const noBtn = document.getElementById('noBtn');
+    const bgMusic = document.getElementById('bgMusic');
+    let noClicks = 0;
+
+    yesBtn.addEventListener('click', () => {
+        // Play music
+        bgMusic.play().catch(() => { console.log("Music blocked"); });
+
+        mainText.innerText = "YIPPIE! I LOVE YOU MY BEAUTIFUL LINA! ❤️";
+        mainImage.src = "yay.jpg";
+        yesBtn.style.display = 'none';
+        noBtn.style.display = 'none';
+    });
+
+    noBtn.addEventListener('click', () => {
+        bgMusic2.play().catch(() => { console.log("Music blocked"); });
+        noClicks++;
+        mainImage.src = "usure.jpg";
+        mainText.innerText = "Are you sure🥺";
+
+        let newSize = 20 + noClicks * 20;
+        yesBtn.style.fontSize = newSize + "px";
+        yesBtn.style.padding = (10 + noClicks * 10) + "px " + (20 + noClicks * 20) + "px";
+
+        if (newSize > 200) {
+            yesBtn.style.position = 'absolute';
+            yesBtn.style.top = '50%';
+            yesBtn.style.left = '50%';
+            yesBtn.style.transform = 'translate(-50%, -50%) scale(3)';
+        }
+    });
+</script>
+
+</body>
+</html>
